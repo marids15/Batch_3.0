@@ -8,3 +8,9 @@ body {
     vertical-align: middle;
     text-align: center;
 }
+.btn {
+    box-sizing: 25px;
+    text-decoration-color: grey;
+    background-color: red;
+    font-weight: bold;
+}

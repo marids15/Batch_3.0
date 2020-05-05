@@ -8,9 +8,9 @@
 <body>
 <h2>
     <label for="cvs">Line Clipping</label>
-    <button id="cmdChecking">Check</button>
-    <button id="cmdClipping">Clip</button>
-    <button id="cmdClear">Clear</button>
+    <button id="cmdChecking" class="btn">Check</button>
+    <button id="cmdClipping" class="btn">Clip</button>
+    <button id="cmdClear" class="btn">Clear</button>
 </h2>
 <canvas id="cvs" width="1000" height="500" style="background-color: ghostwhite; border: thin  gray solid"></canvas>
 <fieldset>
@@ -127,7 +127,7 @@
             let outCode2 = setBitcodes(end);
 
             //console.log('outcodes are : ' + outCode1 + ' and ' + outCode2);
-            txtLog = 'Outcodes are : ' + outCode1 + ' and ' + outCode2;
+            txtLog = 'Outcodes are : start-point ' + outCode1 + ' and end-point ' + outCode2 + ' and this is the guide line for how we are going to cut the lines';
             addLogText(txtLog + NewShift);
 
             //Log the results
@@ -135,12 +135,18 @@
                 //console.log('accept');
                 txtLog = 'Accepted';
                 addLogText(txtLog + NewShift);
-            }else if( (outCode1 && outCode2) != 0){
+            }else if( /*(outCode1 && outCode2) /*!= 0*/( outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0001' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '0001' || outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0100' || outCode1 == '1000' && outCode2 == '0100' || outCode1 == '0010' && outCode2 == '0001')){
                 //console.log('reject');
-                txtLog = 'Rejected'; //Rejects even when going through whole window area
+                txtLog = 'Clipping needed'; 
                 addLogText(txtLog + NewShift);
-            }else{
-                txtLog = 'Clipping needed';
+            
+            }else if(outCode1 == '0000' || outCode2 == '0000'){
+                txtLog = 'Clipping needed'; 
+                addLogText(txtLog + NewShift);
+
+            }
+            else{
+                txtLog = 'rejected';
                 addLogText(txtLog + NewShift);
             }
             addLogText(Divider);    
