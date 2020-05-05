@@ -117,7 +117,7 @@
         function checkStack(endPoints){          // takes all lines at 1 time
             
             //console.log('end points of line : ' + endPoints[0] + " to " + endPoints[1]);
-            txtLog = 'End points of line : ' + endPoints[0] + " to " + endPoints[1];
+            txtLog = 'End points of line (x, y): ' + endPoints[0] + " to " + endPoints[1];
             addLogText(txtLog + NewShift);
 
             let start = endPoints[0];
@@ -135,7 +135,8 @@
                 //console.log('accept');
                 txtLog = 'Accepted';
                 addLogText(txtLog + NewShift);
-            }else if( /*(outCode1 && outCode2) /*!= 0*/( outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0001' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '0001' || outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0100' || outCode1 == '1000' && outCode2 == '0100' || outCode1 == '0010' && outCode2 == '0001')){
+            }else if( /*(outCode1 && outCode2) /*!= 0*/( outCode1 == '0010' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0010' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '1000' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '0001' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0001' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1001' || outCode1 == '0100' && outCode2 == '1001' || outCode1 == '1001' && outCode2 == '0100' || outCode1 == '0110' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0110' || outCode1 == '0110' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0110' || outCode1 == '0101' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0101' || outCode1 == '1000' && outCode2 == '0101' || outCode1 == '0101' && outCode2 == '1000'      
+          )) { 
                 //console.log('reject');
                 txtLog = 'Clipping needed'; 
                 addLogText(txtLog + NewShift);
