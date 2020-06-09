@@ -24,8 +24,8 @@
     //------------------------------------------------------------------------------------------------------------------
     const yMax = 400
     const xMax = 850
-    const yMin = 150
-    const xMin = 100
+    const yMin = 100
+    const xMin = 150
     //Canvas
     const cvs = document.getElementById("cvs"); //Paint CVS
     const ctx = cvs.getContext("2d"); //paint context
@@ -118,16 +118,16 @@
             updateCanvas();
         };
         function checkStack(endPoints){          // takes all lines at 1 time
-            
-            //console.log('end points of line : ' + endPoints[0] + " to " + endPoints[1]);
-            txtLog = 'End points of line (x, y): ' + endPoints[0] + " to " + endPoints[1];
-            addLogText(txtLog + NewShift);
-
             let start = endPoints[0];
             let end = endPoints[1];
 
             let outCode1 = setBitcodes(start);
             let outCode2 = setBitcodes(end);
+          
+            //console.log('end points of line : ' + endPoints[0] + " to " + endPoints[1]);
+            txtLog = 'End points of line (x, y): ' + Math.round(start[0]) +'x, '+ Math.round(start[1])+ 'y & ' + Math.round(end[0]) + 'x, ' + Math.round(end[1])+'y';
+            addLogText(txtLog + NewShift);
+
 
             //console.log('outcodes are : ' + outCode1 + ' and ' + outCode2);
             txtLog = 'Outcodes are : start-point ' + outCode1 + ' and end-point ' + outCode2 + ' and this is the guide line for how we are going to cut the lines';
@@ -138,10 +138,8 @@
                 //console.log('accept');
                 txtLog = 'Accepted';
                 addLogText(txtLog + NewShift);
-            }/*else if/*( outCode1 == '0010' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0010' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '1000' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '0001' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0001' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1001' || outCode1 == '0100' && outCode2 == '1001' || outCode1 == '1001' && outCode2 == '0100' || outCode1 == '0110' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0110' || outCode1 == '0110' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0110' || outCode1 == '0101' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0101' || outCode1 == '1000' && outCode2 == '0101' || outCode1 == '0101' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0100'
-          )*/
-            if ((start.x == end.x && (start.x < xMin || start.x > xMax)) && (start.y == end.y && (start.y < yMin || start.y > yMax)))
-                { 
+            }
+            if (xCheck(start[0], end[0]) && ycheck(start[1], end[1]) && cornerCheck(start, end)){ 
                 //console.log('reject');
                 txtLog = 'This line will be clipped in both ends as it goes through the clipping frame'; 
                 addLogText(txtLog + NewShift);
@@ -157,6 +155,36 @@
             addLogText(Divider);    
 
         };
+        function xCheck(start, end){
+            console.log(start, end)
+            if (start < xMin && end > xMin){
+                return true;
+            } 
+            else if(start > xMax && end < xMax){
+                return true;
+            }
+            else if(start < xMax && start > xMin){
+                return true;
+            }
+            return false;
+        }
+        function ycheck(start, end){
+            console.log(start, end)
+            if (start < yMin && end > yMin){
+                return true;
+            } 
+            else if(start > yMax && end < yMax){
+                return true;
+            }
+            else if(start < yMax && start > yMin){
+                return true
+            }
+            return false;
+        }
+        function cornerCheck(start, end){
+
+            return true;
+        }
 
         function clipLine(aLine) {
             const points = aLine.getPoints();
@@ -174,7 +202,7 @@
                 return false;
             }else {
                 calcIntersectingPoints(aLine);
-                clipLine(aLine);
+                clipLine(aLine); // CHECK THIS UP!
             }
             return true;
         }
@@ -257,7 +285,7 @@
             ctx.lineWidth = 2;
             ctx.beginPath(); // Making canvas ready to create a path
             ctx.moveTo(points[0].x, points[0].y); //Move canvas pen to start point
-            start = [points[0].x, points[0].y.toFixed()]; //Store start values & removes decimals
+            start = [points[0].x, points[0].y]; //Store start values & removes decimals
             ctx.lineTo(points[1].x, points[1].y); // creating a path to rubber band position
             ctx.stroke(); //convert the path to stroke (aka line)
         };
@@ -265,7 +293,7 @@
         this.endDraw = function () {
             points[1] = new TPosition(points[1].x, points[1].y);
 
-            stop = [points[1].x, points[1].y.toFixed()];//Store end values & removes decimals
+            stop = [points[1].x, points[1].y];//Store end values & removes decimals
 
             stack.push([start, stop]);//Send line values to stack array
 

@@ -22,10 +22,7 @@
     //------------------------------------------------------------------------------------------------------------------
     //------ Variables, Constants and Objects
     //------------------------------------------------------------------------------------------------------------------
-    const yMax = 400
-    const xMax = 850
-    const yMin = 150
-    const xMin = 100
+
     //Canvas
     const cvs = document.getElementById("cvs"); //Paint CVS
     const ctx = cvs.getContext("2d"); //paint context
@@ -138,20 +135,19 @@
                 //console.log('accept');
                 txtLog = 'Accepted';
                 addLogText(txtLog + NewShift);
-            }/*else if/*( outCode1 == '0010' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0010' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '1000' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '0001' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0001' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1001' || outCode1 == '0100' && outCode2 == '1001' || outCode1 == '1001' && outCode2 == '0100' || outCode1 == '0110' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0110' || outCode1 == '0110' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0110' || outCode1 == '0101' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0101' || outCode1 == '1000' && outCode2 == '0101' || outCode1 == '0101' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0100'
-          )*/
-            if ((start.x == end.x && (start.x < xMin || start.x > xMax)) && (start.y == end.y && (start.y < yMin || start.y > yMax)))
-                { 
+            }else if( outCode1 == '0010' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0010' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '1000' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '1000' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '0001' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0001' || outCode1 == '0100' && outCode2 == '1010' || outCode1 == '1010' && outCode2 == '0100' || outCode1 == '1001' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '1001' || outCode1 == '0100' && outCode2 == '1001' || outCode1 == '1001' && outCode2 == '0100' || outCode1 == '0110' && outCode2 == '1000' || outCode1 == '1000' && outCode2 == '0110' || outCode1 == '0110' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0110' || outCode1 == '0101' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0101' || outCode1 == '1000' && outCode2 == '0101' || outCode1 == '0101' && outCode2 == '1000' || outCode1 == '0100' && outCode2 == '0001' || outCode1 == '0001' && outCode2 == '0100' || outCode1 == '0100' && outCode2 == '0010' || outCode1 == '0010' && outCode2 == '0100'      
+          ) { 
                 //console.log('reject');
-                txtLog = 'This line will be clipped in both ends as it goes through the clipping frame'; 
+                txtLog = 'Clipping needed'; 
                 addLogText(txtLog + NewShift);
             
             }else if(outCode1 == '0000' || outCode2 == '0000'){
-                txtLog = 'This line will be clipped as it has one endpoint inside the clipping frame'; 
+                txtLog = 'Clipping needed'; 
                 addLogText(txtLog + NewShift);
+
             }
-             else{
-                txtLog = 'This line will not be Clipped, as it is not inside the frame/ cliping window';
+            else{
+                txtLog = 'rejected';
                 addLogText(txtLog + NewShift);
             }
             addLogText(Divider);    
